@@ -21,29 +21,52 @@
             </p>
         </div>
         <div class="queries">
-            <div class="count">
+            <div class="count d-flex justify-content-between">
                 <!-- <h5 class='mb-5'>QUERY FUNCTION</h5> -->
-                <div class="content">
+                <div class="content w-50">
                     <div class="query mb-3">
                         <h6>--Query:</h6>
-                        
                     </div>
                     
                     <form method='POST' class='row mb-5'>
                         <div class="custom-group">
                             <p class='statement text-danger'>SELECT </p>
-                            <select class="form-select text-primary" name='select'>
-                                <option selected>Select Attribute</option>
-                                <option>COUNT(*)</option>
-                                <option>SUM</option>
-                                <option>MAX</option>
-                                <option>MIN</option>
-                                <option>AVG</option>
-                            </select>
+                            <div class="custom-group mb-3" name='select'>
+                                <select class="form-control text-primary" id='basic-addon1' name='select_parent'>
+                                    <option selected>Function</option>
+                                    <option>COUNT</option>
+                                    <option>SUM</option>
+                                    <option>MAX</option>
+                                    <option>MIN</option>
+                                    <option>AVG</option>
+                                </select>
+                                <select type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" name='select_child'>
+                                    <option selected>Attribute</option>
+                                    <option>(*)</option>
+                                    <option>(emp_id)</option>
+                                    <option>(first_name)</option>
+                                    <option>(last_name)</option>
+                                    <option>(birth_date)</option>
+                                    <option>(sex)</option>
+                                    <option>(salary)</option>
+                                    <option>(salary)</option>
+                                    <option>(branch_id)</option>
+                                    <option>(branch_name)</option>
+                                    <option>(mgr_id)</option>
+                                    <option>(mgr_start_date)</option>
+                                    <option>(client_id)</option>
+                                    <option>(client_name)</option>
+                                    <option>(total_sales)</option>
+                                    <option>(supplier_name)</option>
+                                    <option>(supplier_type)</option>)
+                                </select>
+                            </div>
                         </div>
+
+
                         <div class="custom-group">
                             <p class='statement text-danger'>FROM </p>
-                            <select class="form-select text-primary" name='from'>
+                            <select class="form-select text-primary" name='table'>
                                 <option selected>Select Table</option>
                                 <option>Employee</option>
                                 <option>Branch</option>
@@ -64,6 +87,9 @@
                                     <option>>=</option>
                                     <option><=</option>
                                     <option>!=</option>
+                                    <option>is</option>
+                                    <option>isnot</option>
+                                    <option>in</option>
                                 
                                 </select>
 
@@ -76,6 +102,7 @@
                                 <option selected>Select Attribute</option>
                                 <option>sex</option>
                                 <option>branch_id</option>
+                                <option>supply_type</option>
                             </select>
                         </div>
                         <div class="custom-group">
@@ -90,6 +117,14 @@
                                 <option>salary</option>
                                 <option>salary</option>
                                 <option>branch_id</option>
+                                <option>branch_name</option>
+                                <option>mgr_id</option>
+                                <option>mgr_start_date</option>
+                                <option>client_id</option>
+                                <option>client_name</option>
+                                <option>total_sales</option>
+                                <option>supplier_name</option>
+                                <option>supplier_type</option>
                             </select>
                         </div>
                         <div class="query-btn mt-3 d-flex justify-content-center">
@@ -97,54 +132,60 @@
                         </div>
                     </form>
 
-                    <div class="result">
-                        <h6>--Result:</h6>
-                        <?php
-                        $servername = "localhost";
-                        $username = "root";
-                        $password = "";
-                        $dbname = "Company";
+                </div>
+                <div class="result">
+                    <h6>--Result:</h6>
+                    <?php
+                    $servername = "localhost";
+                    $username = "root";
+                    $password = "";
+                    $dbname = "Company";
 
-                        $select = $_POST['select'];
-                        $from = $_POST['from'];
+                    // $select = $POST['select'.'select_child']
 
-                        $conn = new mysqli($servername, $username, $password, $dbname);
+                    $attribute = $_POST['select_parent'].$_POST['select_child'];
+                    // $select_child = $_POST['select_child'];
+                    $table = $_POST['table'];
 
-                        if ($conn->connect_error) {
-                            die("Connection failed: " . $conn->connect_error);
+                    $conn = new mysqli($servername, $username, $password, $dbname);
+
+                    if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                    }
+
+                    // $sql = "SELECT COUNT(*), AVG(salary) FROM Employee GROUP BY branch_id"; 
+                    $sql = "SELECT $attribute FROM $table";
+                    $result = $conn->query($sql);
+
+
+                    if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                        echo "
+                            <table class='table'>
+                                <thead>
+                                    </tr>
+                                        <th>showing result for <span class='text-danger'>SELECT </span>" .$attribute . "  <span class='text-danger'> FROM </span> " .$table. "</th>
+                                    <tr>
+                                    <tr class='text-primary'>
+                                        <th>" .$attribute. "</th>
+                                        <th>AVG(salary)</th>
+                                    </tr>
+                                </thead>";
+                        echo "
+                                <tbody>
+                                    <tr>
+                                        <td>" .$row[$attribute]. "</td>
+                                        <td>" .$row['AVG(salary)']. "</td>
+                                    </tr>
+                                </tbody>";
                         }
+                        echo "</table>";
+                    } else {
+                        echo "Null";
+                    }
 
-                        // $sql = "SELECT COUNT(*), AVG(salary) FROM Employee GROUP BY branch_id"; 
-                        $sql = "SELECT $select FROM $from";
-                        $result = $conn->query($sql);
-
-
-                        if ($result->num_rows > 0) {
-                            while($row = $result->fetch_assoc()) {
-                            echo "
-                                <table class='table'>
-                                    <thead>
-                                        <tr class='text-primary'>
-                                            <th>" .$select. "</th>
-                                            <th>AVG(salary)</th>
-                                        </tr>
-                                    </thead>";
-                            echo "
-                                    <tbody>
-                                        <tr>
-                                            <td>" .$row['COUNT(*)']. "</td>
-                                            <td>" .$row['AVG(salary)']. "</td>
-                                        </tr>
-                                    </tbody>";
-                            }
-                            echo "</table>";
-                        } else {
-                            echo "Null";
-                        }
-
-                        $conn->close();
-                        ?>
-                    </div>
+                    $conn->close();
+                    ?>
                 </div>
             </div>
         </div>
