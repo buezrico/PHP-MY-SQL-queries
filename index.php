@@ -33,7 +33,7 @@
                         <div class="custom-group">
                             <p class='statement text-danger'>SELECT </p>
                             <select class="form-select text-primary" name='select'>
-                                <option selected>Select Attribute to query</option>
+                                <option selected>Select Attribute</option>
                                 <option>COUNT(*)</option>
                                 <option>SUM</option>
                                 <option>MAX</option>
@@ -44,7 +44,7 @@
                         <div class="custom-group">
                             <p class='statement text-danger'>FROM </p>
                             <select class="form-select text-primary" name='from'>
-                                <option selected>Select Table to query</option>
+                                <option selected>Select Table</option>
                                 <option>Employee</option>
                                 <option>Branch</option>
                                 <option>Client</option>
@@ -56,14 +56,24 @@
                             <p class='statement text-danger'>WHERE </p>
                             <div class="where-input ">
                                 <input type="text" class='form-control'>
-                                <p class='equal-sign mx-2'> = </p> 
+
+                                <select name="comparison" class='form-select text-primary'>
+                                    <option selected>=</option>
+                                    <option>></option>
+                                    <option><</option>
+                                    <option>>=</option>
+                                    <option><=</option>
+                                    <option>!=</option>
+                                
+                                </select>
+
                                 <input type="text" class='form-control'>
                             </div>
                         </div>
                         <div class="custom-group">
                             <p class='statement text-danger'>GROUP BY </p>
                             <select class="form-select text-primary">
-                                <option selected>Select Attribute for Grouping</option>
+                                <option selected>Select Attribute</option>
                                 <option>sex</option>
                                 <option>branch_id</option>
                             </select>
@@ -71,7 +81,7 @@
                         <div class="custom-group">
                             <p class='statement text-danger'>ORDER BY </p>
                             <select class="form-select text-primary">
-                                <option selected>Select Attribute for Grouping</option>
+                                <option selected>Select Attribute</option>
                                 <option>emp_id</option>
                                 <option>first_name</option>
                                 <option>last_name</option>
@@ -83,7 +93,7 @@
                             </select>
                         </div>
                         <div class="query-btn mt-3 d-flex justify-content-center">
-                            <button class="btn-info btn w-25" type='submit'>QUERY</button>
+                            <button class="btn-info btn  w-25" type='submit'>QUERY</button>
                         </div>
                     </form>
 
