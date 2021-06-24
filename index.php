@@ -29,10 +29,10 @@
                         
                     </div>
                     
-                    <form action="index.php" method='post' class='row mb-5'>
+                    <form method='POST' class='row mb-5'>
                         <div class="custom-group">
                             <p class='statement text-danger'>SELECT </p>
-                            <select class="form-select text-primary">
+                            <select class="form-select text-primary" name='select'>
                                 <option selected>Select Attribute to query</option>
                                 <option>COUNT(*)</option>
                                 <option>SUM</option>
@@ -43,7 +43,7 @@
                         </div>
                         <div class="custom-group">
                             <p class='statement text-danger'>FROM </p>
-                            <select class="form-select text-primary">
+                            <select class="form-select text-primary" name='from'>
                                 <option selected>Select Table to query</option>
                                 <option>Employee</option>
                                 <option>Branch</option>
@@ -82,6 +82,8 @@
                                 <option>branch_id</option>
                             </select>
                         </div>
+
+
                     </form>
 
                     <div class="result">
@@ -92,13 +94,17 @@
                         $password = "";
                         $dbname = "Company";
 
+                        $select = $_POST['select'];
+                        $from = $_POST['from'];
+
                         $conn = new mysqli($servername, $username, $password, $dbname);
 
                         if ($conn->connect_error) {
                             die("Connection failed: " . $conn->connect_error);
                         }
 
-                        $sql = "SELECT COUNT(*), AVG(salary) FROM Employee GROUP BY branch_id";
+                        // $sql = "SELECT COUNT(*), AVG(salary) FROM Employee GROUP BY branch_id"; 
+                        $sql = "SELECT $select FROM $from";
                         $result = $conn->query($sql);
 
 
