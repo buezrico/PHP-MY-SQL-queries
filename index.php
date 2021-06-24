@@ -82,8 +82,9 @@
                                 <option>branch_id</option>
                             </select>
                         </div>
-
-
+                        <div class="query-btn mt-3 d-flex justify-content-center">
+                            <button class="btn-info btn w-25" type='submit'>QUERY</button>
+                        </div>
                     </form>
 
                     <div class="result">
@@ -109,15 +110,15 @@
 
 
                         if ($result->num_rows > 0) {
+                            while($row = $result->fetch_assoc()) {
                             echo "
                                 <table class='table'>
                                     <thead>
                                         <tr class='text-primary'>
-                                            <th>COUNT(*)</th>
+                                            <th>" .$select. "</th>
                                             <th>AVG(salary)</th>
                                         </tr>
                                     </thead>";
-                            while($row = $result->fetch_assoc()) {
                             echo "
                                     <tbody>
                                         <tr>
