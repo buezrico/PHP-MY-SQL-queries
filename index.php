@@ -78,7 +78,25 @@
                         <div class="custom-group where">
                             <p class='statement text-danger'>WHERE </p>
                             <div class="where-input ">
-                                <input type="text" class='form-control'>
+                                <select class="form-select text-primary" name='condition_attr'>
+                                    <option selected>Attribute</option>
+                                    <option>emp_id</option>
+                                    <option>first_name</option>
+                                    <option>last_name</option>
+                                    <option>birth_date</option>
+                                    <option>sex</option>
+                                    <option>salary</option>
+                                    <option>salary</option>
+                                    <option>branch_id</option>
+                                    <option>branch_name</option>
+                                    <option>mgr_id</option>
+                                    <option>mgr_start_date</option>
+                                    <option>client_id</option>
+                                    <option>client_name</option>
+                                    <option>total_sales</option>
+                                    <option>supplier_name</option>
+                                    <option>supplier_type</option>
+                            </select>
 
                                 <select name="comparison" class='form-select text-primary'>
                                     <option selected>=</option>
@@ -93,7 +111,7 @@
                                 
                                 </select>
 
-                                <input type="text" class='form-control'>
+                                <input type="text" class='form-control' name='condition_param'>
                             </div>
                         </div>
                         <div class="custom-group">
@@ -144,8 +162,10 @@
                     // $select = $POST['select'.'select_child']
 
                     $attribute = $_POST['select_parent'].$_POST['select_child'];
-                    // $select_child = $_POST['select_child'];
                     $table = $_POST['table'];
+                    $condition_attr = $_POST['condition_attr'];
+                    $condition_para = $_POST['condition_param'];
+                    $comparison = $_POST['comparison'];
 
                     $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -154,7 +174,7 @@
                     }
 
                     // $sql = "SELECT COUNT(*), AVG(salary) FROM Employee GROUP BY branch_id"; 
-                    $sql = "SELECT $attribute FROM $table";
+                    $sql = "SELECT $attribute FROM $table WHERE $condition_attr $comparison $condition_param";
                     $result = $conn->query($sql);
 
 
