@@ -86,7 +86,6 @@
                                     <option>birth_date</option>
                                     <option>sex</option>
                                     <option>salary</option>
-                                    <option>salary</option>
                                     <option>branch_id</option>
                                     <option>branch_name</option>
                                     <option>mgr_id</option>
@@ -96,7 +95,7 @@
                                     <option>total_sales</option>
                                     <option>supplier_name</option>
                                     <option>supplier_type</option>
-                            </select>
+                                </select>
 
                                 <select name="comparison" class='form-select text-primary'>
                                     <option selected>=</option>
@@ -116,7 +115,7 @@
                         </div>
                         <div class="custom-group">
                             <p class='statement text-danger'>GROUP BY </p>
-                            <select class="form-select text-primary">
+                            <select class="form-select text-primary" name='group'>
                                 <option selected>Select Attribute</option>
                                 <option>sex</option>
                                 <option>branch_id</option>
@@ -125,7 +124,7 @@
                         </div>
                         <div class="custom-group">
                             <p class='statement text-danger'>ORDER BY </p>
-                            <select class="form-select text-primary">
+                            <select class="form-select text-primary" name='order'>
                                 <option selected>Select Attribute</option>
                                 <option>emp_id</option>
                                 <option>first_name</option>
@@ -166,6 +165,8 @@
                     $condition_attr = $_POST['condition_attr'];
                     $condition_para = $_POST['condition_param'];
                     $comparison = $_POST['comparison'];
+                    $group = $_POST['group'];
+                    $order = $_POST['order'];
 
                     $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -174,7 +175,9 @@
                     }
 
                     // $sql = "SELECT COUNT(*), AVG(salary) FROM Employee GROUP BY branch_id"; 
-                    $sql = "SELECT $attribute FROM $table WHERE $condition_attr $comparison $condition_param";
+                    $sql = "SELECT $attribute FROM $table WHERE $condition_attr $comparison $condition_param 
+                    -- GROUP BY $group ORDER BY $order
+                    ";
                     $result = $conn->query($sql);
 
 
@@ -188,14 +191,12 @@
                                     <tr>
                                     <tr class='text-primary'>
                                         <th>" .$attribute. "</th>
-                                        <th>AVG(salary)</th>
                                     </tr>
                                 </thead>";
                         echo "
                                 <tbody>
                                     <tr>
                                         <td>" .$row[$attribute]. "</td>
-                                        <td>" .$row['AVG(salary)']. "</td>
                                     </tr>
                                 </tbody>";
                         }
