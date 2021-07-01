@@ -49,7 +49,6 @@
                                     <option>(birth_date)</option>
                                     <option>(sex)</option>
                                     <option>(salary)</option>
-                                    <option>(salary)</option>
                                     <option>(branch_id)</option>
                                     <option>(branch_name)</option>
                                     <option>(mgr_id)</option>
@@ -78,7 +77,7 @@
                         <div class="custom-group where">
                             <p class='statement text-danger'>WHERE </p>
                             <div class="where-input ">
-                                <select class="form-select text-primary" name='condition_attr'>
+                                <select class="form-select w-100 text-primary" name='condition_attr'>
                                     <option selected>Attribute</option>
                                     <option>emp_id</option>
                                     <option>first_name</option>
@@ -163,7 +162,7 @@
                     $attribute = $_POST['select_parent'].$_POST['select_child'];
                     $table = $_POST['table'];
                     $condition_attr = $_POST['condition_attr'];
-                    $condition_para = $_POST['condition_param'];
+                    $condition_param = $_POST['condition_param'];
                     $comparison = $_POST['comparison'];
                     $group = $_POST['group'];
                     $order = $_POST['order'];
@@ -175,9 +174,12 @@
                     }
 
                     // $sql = "SELECT COUNT(*), AVG(salary) FROM Employee GROUP BY branch_id"; 
-                    $sql = "SELECT $attribute FROM $table WHERE $condition_attr $comparison $condition_param 
-                    -- GROUP BY $group ORDER BY $order
-                    ";
+                    $sql = 
+                    "SELECT $attribute 
+                    FROM $table 
+                    WHERE $condition_attr $comparison $condition_param 
+                    GROUP BY $group
+                    ORDER BY $order";
                     $result = $conn->query($sql);
 
 
