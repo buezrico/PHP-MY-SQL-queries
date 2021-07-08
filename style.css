@@ -33,6 +33,6 @@ h6 {
   display: flex;
   align-items: center;
 }
-/* .where .where-input input {
+.where .where-input input {
   border: 2px solid green;
-} */
+}

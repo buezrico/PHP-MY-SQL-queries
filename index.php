@@ -9,6 +9,57 @@
         integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
     <title>DB QUERIES</title>
+
+    <style>
+        p {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        h5 {
+        font-weight: bold;
+        }
+        h6 {
+        font-weight: bold;
+        }
+
+        .custom-group {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.5rem;
+        }
+        .custom-group select {
+        /* border: none; */
+        font-weight: bold;
+        /* width: 50%; */
+        /* padding: 0.5rem; */
+        /* background: transparent; */
+        }
+        .custom-group .statement {
+        width: 30%;
+        }
+        
+        .where {
+        display: flex;
+        align-items: center;
+        }
+        .where .where-input select{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        }
+        .where .where-input input, select {
+            outline: none !important;
+            box-shadow: none !important;
+            
+        }
+        .query-btn button {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+         
+
+    </style>
 </head>
 
 <body>
@@ -40,7 +91,7 @@
                                     <option>MIN</option>
                                     <option>AVG</option>
                                 </select>
-                                <select type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" name='select_child'>
+                                <select type="text" class="form-control text-success" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" name='select_child'>
                                     <option selected>Attribute</option>
                                     <option>(*)</option>
                                     <option>(emp_id)</option>
@@ -76,8 +127,8 @@
                         </div>
                         <div class="custom-group where">
                             <p class='statement text-danger'>WHERE </p>
-                            <div class="where-input ">
-                                <select class="form-select w-100 text-primary" name='condition_attr'>
+                            <div class="where-input">
+                                <select class="form-control text-primary" name='condition_attr'>
                                     <option selected>Attribute</option>
                                     <option>emp_id</option>
                                     <option>first_name</option>
@@ -96,7 +147,7 @@
                                     <option>supplier_type</option>
                                 </select>
 
-                                <select name="comparison" class='form-select text-primary'>
+                                <select name="comparison" class='form-select w-25 text-primary'>
                                     <option selected>=</option>
                                     <option>></option>
                                     <option><</option>
@@ -144,7 +195,7 @@
                             </select>
                         </div>
                         <div class="query-btn mt-3 d-flex justify-content-center">
-                            <button class="btn-info btn  w-25" type='submit'>QUERY</button>
+                            <button class="btn-success btn  px-5 py-2" type='submit'>QUERY</button>
                         </div>
                     </form>
 
